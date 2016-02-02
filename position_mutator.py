@@ -62,4 +62,4 @@ class Buy(CommonEqualityMixin):
         return "Buy %d %s" % (self.amount, self.symbol)
 
     def execute_trade(self, trader):
-        print "Would buy %d of %s" % (self.amount, self.symbol)
+        print "Buy %d of %s" % (self.amount, self.symbol)
