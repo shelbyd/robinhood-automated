@@ -6,13 +6,13 @@ import json
 def json_print(data):
     print json.dumps(data, sort_keys=True, indent=2, separators=(',', ': '))
 
-targets = {
-        'AGNC': 1,
-        'NLY': 1,
-        'JNJ': 1,
-        'PG': 1,
-        'KO': 1,
-        }
+weights = {
+    'AGNC': 1,
+    'NLY': 1,
+    'JNJ': 1,
+    'PG': 1,
+    'KO': 1,
+}
 
 trader = Robinhood()
 
@@ -33,14 +33,14 @@ for position in trader.positions():
     positions.append(Position(symbol, quantity))
 
 prices = {}
-for symbol in targets:
+for symbol in weights:
     prices[symbol] = float(trader.last_trade_price(symbol))
 
 mutator = PositionMutator(
         float(trader.get_account()['cash']),
         positions,
-        targets,
+        weights,
         prices)
 
 for trade in mutator.optimal_trades():
-    trade.execute(trader)
+    trade.execute_trade(trader)
