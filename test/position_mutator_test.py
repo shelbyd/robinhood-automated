@@ -63,6 +63,16 @@ class TestPositionMutator(unittest.TestCase):
             Buy(1, 'AGNC'),
         ])
 
+    def test_optimal_trade_equal_equity_picks_lower_price(self):
+        mutator = PositionMutator(
+                6.0,
+                [],
+                {'AGNC': 1, 'NLY': 1},
+                {'AGNC': 4.0, 'NLY': 5.0})
+        self.assertItemsEqual(mutator.optimal_trades(), [
+            Buy(1, 'AGNC'),
+        ])
+
 if __name__ == "__main__":
     unittest.main()
 

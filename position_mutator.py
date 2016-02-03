@@ -1,3 +1,5 @@
+import itertools
+
 class CommonEqualityMixin(object):
     def __eq__(self, other):
         return (isinstance(other, self.__class__)
@@ -39,7 +41,10 @@ class PositionMutator:
         return [Buy(buys[symbol], symbol) for symbol in buys if buys[symbol] > 0]
 
     def lowest_equity(self, buys):
-        return min(self.symbols(buys), key=Symbol.weighted_equity)
+        sorted_list = sorted(self.symbols(buys), key=Symbol.weighted_equity)
+        grouped_by_equity = itertools.groupby(sorted_list, key=Symbol.weighted_equity)
+        minimum_symbols = list(next(grouped_by_equity)[1])
+        return min(minimum_symbols, key=lambda s: s.price)
 
     def position_for_symbol(self, symbol):
         possibilities = (p for p in self.positions if p.symbol == symbol)
