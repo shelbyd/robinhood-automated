@@ -6,6 +6,32 @@ import json
 def json_print(data):
     print json.dumps(data, sort_keys=True, indent=2, separators=(',', ': '))
 
+def login(trader):
+    successful = False
+    while not successful:
+        successful = trader.login(
+                username=raw_input('Username: '),
+                password=getpass.getpass())
+        if not successful:
+            print 'Incorrect username/password.'
+
+def prices(weights, trader):
+    prices = {}
+    for symbol in weights:
+        prices[symbol] = float(trader.last_trade_price(symbol))
+    return prices
+
+def positions(trader):
+    positions = []
+
+    for position in trader.positions():
+        instrument = trader.instrument(position['instrument'])
+        symbol = instrument['symbol']
+        quantity = float(position['quantity'])
+        positions.append(Position(symbol, quantity))
+
+    return positions
+
 weights = {
     'AGNC': 2,
     'NLY': 2,
@@ -23,32 +49,13 @@ weights = {
 }
 
 trader = Robinhood()
-
-successful = False
-while not successful:
-    successful = trader.login(
-            username=raw_input('Username: '),
-            password=getpass.getpass())
-    if not successful:
-        print 'Incorrect username/password.'
-
-positions = []
-
-for position in trader.positions():
-    instrument = trader.instrument(position['instrument'])
-    symbol = instrument['symbol']
-    quantity = float(position['quantity'])
-    positions.append(Position(symbol, quantity))
-
-prices = {}
-for symbol in weights:
-    prices[symbol] = float(trader.last_trade_price(symbol))
+login(trader)
 
 mutator = PositionMutator(
         float(trader.get_account()['cash']),
-        positions,
+        positions(trader),
         weights,
-        prices)
+        prices(weights, trader))
 
 for trade in mutator.optimal_trades():
     trade.execute_trade(trader)
