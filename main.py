@@ -32,7 +32,7 @@ def positions(trader):
 
     return positions
 
-weights = {
+old_weights = {
     'AGNC': 2,
     'NLY': 2,
     'JNJ': 2,
@@ -47,6 +47,28 @@ weights = {
     'NUE': 1,
     'VVC': 1,
 }
+
+weights = {}
+desired_stocks = [
+    'AWR',
+    'CINF',
+    'CL',
+    'DOV',
+    'EMR',
+    'GPC',
+    'JNJ',
+    'KO',
+    'LANC',
+    'LOW',
+    'MMM',
+    'NDSN',
+    'NWN',
+    'PH',
+    'PG',
+    'VVC',
+]
+for stock in desired_stocks:
+    weights[stock] = 1
 
 trader = Robinhood()
 login(trader)
