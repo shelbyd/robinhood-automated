@@ -1,9 +1,9 @@
-from position_mutator import PositionMutator, Position, Buy
+from purchaser import Purchaser, Position, Buy
 import unittest
 
-class TestPositionMutator(unittest.TestCase):
+class TestPurchaser(unittest.TestCase):
     def test_simple_optimal_trade(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 50.0,
                 [],
                 {'AGNC': 1},
@@ -11,7 +11,7 @@ class TestPositionMutator(unittest.TestCase):
         self.assertItemsEqual(mutator.optimal_trades(), [Buy(1, 'AGNC')])
 
     def test_optimal_trade_with_two_targets(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 50.0,
                 [],
                 {'AGNC': 1, 'NLY': 1},
@@ -22,7 +22,7 @@ class TestPositionMutator(unittest.TestCase):
         ])
 
     def test_optimal_trade_with_different_weights(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 33.0,
                 [],
                 {'AGNC': 2, 'NLY': 1},
@@ -33,7 +33,7 @@ class TestPositionMutator(unittest.TestCase):
         ])
 
     def test_optimal_trade_where_three_can_be_bought(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 33.0,
                 [],
                 {'AGNC': 1},
@@ -43,7 +43,7 @@ class TestPositionMutator(unittest.TestCase):
         ])
 
     def test_optimal_trade_where_already_have_one(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 11.0,
                 [Position('AGNC', 1.0)],
                 {'AGNC': 1, 'NLY': 1},
@@ -53,7 +53,7 @@ class TestPositionMutator(unittest.TestCase):
         ])
 
     def test_optimal_trade_where_weighting_buys_would_fail(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 16.0,
                 [Position('AGNC', 1.0)],
                 {'AGNC': 1, 'NLY': 2},
@@ -64,7 +64,7 @@ class TestPositionMutator(unittest.TestCase):
         ])
 
     def test_optimal_trade_equal_equity_picks_lower_price(self):
-        mutator = PositionMutator(
+        mutator = Purchaser(
                 6.0,
                 [],
                 {'AGNC': 1, 'NLY': 1},
@@ -72,7 +72,3 @@ class TestPositionMutator(unittest.TestCase):
         self.assertItemsEqual(mutator.optimal_trades(), [
             Buy(1, 'AGNC'),
         ])
-
-if __name__ == "__main__":
-    unittest.main()
-

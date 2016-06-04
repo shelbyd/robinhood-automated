@@ -1,6 +1,6 @@
 import getpass
 from Robinhood import Robinhood
-from position_mutator import Position, PositionMutator
+from purchaser import Position, Purchaser
 from data import weights
 
 import json
@@ -33,7 +33,7 @@ def positions(trader):
 trader = Robinhood()
 login(trader)
 
-mutator = PositionMutator(
+mutator = Purchaser(
         float(trader.get_account()['cash']),
         positions(trader),
         weights,

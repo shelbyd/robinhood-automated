@@ -16,7 +16,7 @@ class Position:
         self.symbol = symbol
         self.quantity = quantity
 
-class PositionMutator:
+class Purchaser:
     def __init__(self, cash, positions, weights, prices):
         self.cash = cash
         self.positions = positions
