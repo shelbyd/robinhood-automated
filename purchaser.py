@@ -79,5 +79,8 @@ class Symbol(CommonEqualityMixin):
         self.price = price
         self.weight = weight
 
+    def __repr__(self):
+        return "%f * %d %s @ %f" % (self.weight, self.quantity, self.name, self.price)
+
     def weighted_equity(self):
         return self.price * self.quantity / self.weight
