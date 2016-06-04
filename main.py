@@ -1,6 +1,7 @@
 import getpass
 from Robinhood import Robinhood
 from position_mutator import Position, PositionMutator
+from data import weights
 
 import json
 def login(trader):
@@ -28,28 +29,6 @@ def positions(trader):
         positions.append(Position(symbol, quantity))
 
     return positions
-
-weights = {}
-desired_stocks = [
-    'AWR',
-    'CINF',
-    'CL',
-    'DOV',
-    'EMR',
-    'GPC',
-    'JNJ',
-    'KO',
-    'LANC',
-    'LOW',
-    'MMM',
-    'NDSN',
-    'NWN',
-    'PH',
-    'PG',
-    'VVC',
-]
-for stock in desired_stocks:
-    weights[stock] = 1
 
 trader = Robinhood()
 login(trader)
