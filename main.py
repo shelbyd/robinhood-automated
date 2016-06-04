@@ -3,9 +3,6 @@ from Robinhood import Robinhood
 from position_mutator import Position, PositionMutator
 
 import json
-def json_print(data):
-    print json.dumps(data, sort_keys=True, indent=2, separators=(',', ': '))
-
 def login(trader):
     successful = False
     while not successful:
@@ -31,22 +28,6 @@ def positions(trader):
         positions.append(Position(symbol, quantity))
 
     return positions
-
-old_weights = {
-    'AGNC': 2,
-    'NLY': 2,
-    'JNJ': 2,
-    'PG': 2,
-    'KO': 2,
-    'HCP': 1,
-    'T': 1,
-    'MCY': 1,
-    'ORI': 1,
-    'ABBV': 1,
-    'ED': 1,
-    'NUE': 1,
-    'VVC': 1,
-}
 
 weights = {}
 desired_stocks = [
