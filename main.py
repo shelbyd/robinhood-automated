@@ -24,9 +24,11 @@ class Main:
             if not successful:
                 print 'Incorrect username/password.'
 
+    @Memoize
     def cash(self):
         return float(self.trader().get_account()['cash'])
 
+    @Memoize
     def positions(self):
         positions = []
 
@@ -38,9 +40,11 @@ class Main:
 
         return positions
 
+    @Memoize
     def weights(self):
         return weights
 
+    @Memoize
     def prices(self):
         prices = {}
         for symbol in self.weights():
