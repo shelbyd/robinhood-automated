@@ -69,8 +69,6 @@ class Buy(CommonEqualityMixin):
 
     def execute_trade(self, trader):
         print "Buy %d of %s" % (self.amount, self.symbol)
-        if raw_input('Actually do? [y/N]') == 'y':
-            trader.place_buy_order(self.symbol, self.amount)
 
 class Symbol(CommonEqualityMixin):
     def __init__(self, name, quantity, price, weight):

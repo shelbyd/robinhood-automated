@@ -39,5 +39,3 @@ class Sell(CommonEqualityMixin):
 
     def execute_trade(self, trader):
         print "Sell %d of %s" % (self.amount, self.symbol)
-        if raw_input('Actually do? [y/N]') == 'y':
-            trader.place_sell_order(self.symbol, self.amount)

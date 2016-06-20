@@ -167,7 +167,7 @@ class Robinhood:
             quantity,
             transaction,
             instrument['symbol']
-        ) 
+        )
         res = self.session.post(self.endpoints['orders'], data=data)
         return res
 
