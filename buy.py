@@ -9,6 +9,7 @@ class MainPurchaser(Main):
             cash = float(sys.argv[1])
         else:
             cash = self.cash()
+        print "Buying with ${0}".format(cash)
 
         return Purchaser(
                 cash,
