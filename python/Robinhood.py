@@ -63,6 +63,7 @@ class Robinhood:
         res = res.json()
         try:
             self.auth_token = res['token']
+            print res['token']
         except KeyError:
             return False
         self.headers['Authorization'] = 'Token '+self.auth_token
