@@ -6,7 +6,8 @@ from purchaser import Position
 
 class Main:
     def main(self):
-        for trade in self.get_mutator().optimal_trades():
+        optimal_trades = self.get_mutator().optimal_trades()
+        for trade in sorted(optimal_trades, key=lambda trade: trade.symbol):
             trade.execute_trade(self.trader())
 
     @Memoize
